@@ -1,0 +1,4 @@
+name = Recuperacion de Informacion (Maestria USB)
+description = Búsqueda y recuperación de información.
+core = 7.x
+version = 1.0-07052017

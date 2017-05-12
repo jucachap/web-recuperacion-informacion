@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Implements hook_menu()
+ *
+ * @return mixed
+ */
+function recuperacion_informacion_menu() {
+
+  $items['buscador'] = array(
+    'title' => 'Busqueda y recuperacion de informacion',
+    'page callback' => '_search_process',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme()
+ *
+ * @return array
+ */
+function recuperacion_informacion_theme() {
+  return array(
+    'bartik' => array(
+      'render element' => 'elements',
+      'template' => 'templates/buscador',
+    ),
+  );
+}
+
+function _search_process() {
+
+  $vars = array('process' => TRUE);
+  if (isset($_POST['data']) && trim($_POST['data']['keys']) !== "") {
+    $data = $_POST['data'];
+
+    $keys = $data['keys'];
+    $cluster = isset($data['categorized']) ? 'true' : 'false';
+    $results = $data['results'];
+
+    $url = "http://190.121.139.11:8080/IRProject/rest/reuters/search/$keys/$cluster/$results";
+    $options = array(
+      'method' => 'GET',
+    );
+
+    $http_response = drupal_http_request($url, $options);
+    $vars = json_decode($http_response->data, TRUE);
+  }
+
+  return theme('bartik', $vars);
+}
