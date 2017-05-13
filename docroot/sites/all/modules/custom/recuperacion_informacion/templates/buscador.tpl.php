@@ -21,11 +21,19 @@
 <?php
 
 if (isset($documents)) {
+    $path = 'http://190.121.139.11:8080/IRProject/reuters-news/';
   foreach ($documents as $document) {
     $file_name = substr($document['path'], (87 - count($document['path'])));
     ?>
     <div>
-      <a href="http://190.121.139.11:8080/IRProject/reuters-news/<?php print $file_name; ?>" target="_blank"><?php print $file_name; ?></a>
+        <div><h3><a href="<?php print $path.$file_name; ?>" target="_blank"><?php print $file_name; ?></a></h3></div>
+        <div><h4><i><?php print $path.$file_name; ?></i></h4></div>
+        <div>
+            <?php
+                $text_content = file_get_contents($path.$file_name);
+                print str_replace($keys, '<b>'. $keys .'</b>', $text_content);
+            ?>
+        </div>
     </div>
     <?php
   }

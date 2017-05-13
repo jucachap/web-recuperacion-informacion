@@ -48,6 +48,7 @@ function _search_process() {
 
     $http_response = drupal_http_request($url, $options);
     $vars = json_decode($http_response->data, TRUE);
+    $vars['keys'] = $data['keys'];
   }
 
   return theme('bartik', $vars);
