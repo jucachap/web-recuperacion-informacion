@@ -31,14 +31,25 @@ function recuperacion_informacion_theme() {
   );
 }
 
+/**
+ * Implements hook_access().
+ */
+function recuperacion_informacion_preprocess_page(&$vars){
+  //$title = $vars['node']->title;
+}
+
 function _search_process() {
 
   $vars = array('process' => TRUE);
-  if (isset($_POST['data']) && trim($_POST['data']['keys']) !== "") {
+
+  if (isset($_POST['data']) && trim($_POST['data']['keys']) === "") {
+    drupal_set_message(t('Por favor use algún parámetro de búsqueda'), 'error');
+  }
+  elseif (isset($_POST['data'])) {
     $data = $_POST['data'];
 
     $keys = $data['keys'];
-    $cluster = isset($data['categorized']) ? 'true' : 'false';
+    $cluster = isset($data['category']) ? 'true' : 'false';
     $results = $data['results'];
 
     $url = "http://190.121.139.11:8080/IRProject/rest/reuters/search/$keys/$cluster/$results";
@@ -49,6 +60,10 @@ function _search_process() {
     $http_response = drupal_http_request($url, $options);
     $vars = json_decode($http_response->data, TRUE);
     $vars['keys'] = $data['keys'];
+    $vars['show_cluster'] = isset($data['category']) ? true : false;
+  }
+  else {
+    drupal_get_messages('error');
   }
 
   return theme('bartik', $vars);
