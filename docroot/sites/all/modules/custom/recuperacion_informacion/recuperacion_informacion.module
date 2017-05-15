@@ -9,6 +9,7 @@ function recuperacion_informacion_menu() {
 
   $items['buscador'] = array(
     'title' => 'Busqueda y recuperacion de informacion',
+    'description' => 'home page',
     'page callback' => '_search_process',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
@@ -31,13 +32,6 @@ function recuperacion_informacion_theme() {
   );
 }
 
-/**
- * Implements hook_access().
- */
-function recuperacion_informacion_preprocess_page(&$vars){
-  //$title = $vars['node']->title;
-}
-
 function _search_process() {
 
   $vars = array('process' => TRUE);
@@ -52,7 +46,8 @@ function _search_process() {
     $cluster = isset($data['category']) ? 'true' : 'false';
     $results = $data['results'];
 
-    $url = "http://190.121.139.11:8080/IRProject/rest/reuters/search/$keys/$cluster/$results";
+    $url = "http://190.121.139.11:8080/IRProject/rest/reuters/search/" .
+      str_replace(' ', '+', $keys) . "/$cluster/$results";
     $options = array(
       'method' => 'GET',
     );

@@ -29,12 +29,7 @@ if (isset($documents)) {
   for ($i=0; $i<count($documents); $i++) {
     $document = $documents[$i];
     $file_name = substr($document['path'], (87 - count($document['path'])));
-    //if ($i%2) {
-      $clusters[$document['cluster']] = (isset($clusters[$document['cluster']]) ? $clusters[$document['cluster']]+1 : 1);
-    /*}
-    else {
-      $clusters['cat1'] = (isset($clusters['cat1']) ? $clusters['cat1']+1 : 1);
-    }*/
+    $clusters[$document['cluster']] = (isset($clusters[$document['cluster']]) ? $clusters[$document['cluster']]+1 : 1);
 
     ?>
     <div class="<?php print $document['cluster']; ?>">
@@ -42,7 +37,7 @@ if (isset($documents)) {
             <h3><a href="<?php print $path.$file_name; ?>" target="_blank"><?php print $file_name; ?></a></h3>
         </div>
         <div>
-            <h4><i><?php print $path.$file_name; ?></i></h4>
+            <h4><b>[<?php print $document['cluster']; ?>]</b>&nbsp;<i><?php print $path.$file_name; ?></i></h4>
         </div>
         <div>
             <?php
