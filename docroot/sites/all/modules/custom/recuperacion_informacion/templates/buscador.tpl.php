@@ -1,6 +1,6 @@
 
 <form id="buscador" action="/buscador" method="post" accept-charset="UTF-8">
-  <input id="keys" name="data[keys]" value="" type="text" size="80" placeholder="Escribe el texto a buscar aqui" autocomplete="off" />
+  <input id="keys" name="data[keys]" value="" type="text" size="74" placeholder="Escribe el texto a buscar aqui" autocomplete="off" />
   <input id="send" name="data[send]" value="Buscar" type="submit" />
   <fieldset>
     <legend>Opciones</legend>

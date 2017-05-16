@@ -8,7 +8,7 @@
 function recuperacion_informacion_menu() {
 
   $items['buscador'] = array(
-    'title' => 'Busqueda y recuperacion de informacion',
+    'title' => t('Busqueda y recuperacion de informacion'),
     'description' => 'home page',
     'page callback' => '_search_process',
     'access arguments' => array('access content'),

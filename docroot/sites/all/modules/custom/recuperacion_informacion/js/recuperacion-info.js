@@ -3,7 +3,13 @@
  */
 
 jQuery(document).ready(function(){
-    jQuery('#cluster ul li').click(function(e) {
+    jQuery('#page-title').html('Recuperación de Información');
+
+    $html_content = jQuery('#cluster').html();
+    jQuery('#cluster').hide();
+    jQuery('#categories-left-nav').html($html_content);
+
+    jQuery('#cluster ul li, #categories-left-nav ul li').click(function(e) {
         e.preventDefault();
         $cat_name = jQuery(this).find('span').html();
         $results = jQuery('#results');
